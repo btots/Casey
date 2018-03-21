@@ -1,0 +1,51 @@
+<div *ngIf="blogs?.length > 0; else noBlogs">
+  <div class="container-fluid" *ngFor="let blog of blogs">
+    <div class="row">
+      <div class="col-md-12 test" style="margin: auto;">
+        <div class="blogImageWrap">
+          <img src="#" alt="Blog Entry Hero Image">
+        </div>
+        <h1>{{blog.id}}</h1>
+        <h2>{{blog.title}}</h2>
+        <h4>{{blog.subtitle}}</h4>
+        <p>{{blog.timestamp}}</p>
+        <div [innerHTML]="blog.entry"></div>
+        <div id="disqus_thread"></div>
+        <script>
+          /**
+           *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+           *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+          /*
+          var disqus_config = function () {
+          this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+          this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+          };
+          */
+          (function () { // DON'T EDIT BELOW THIS LINE
+            var d = document,
+              s = d.createElement('script');
+            s.src = 'https://caseyspace.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+          })();
+
+        </script>
+        <noscript>Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+        <div class="row test">
+          <div class="col-sm-12 test">
+            Blog footer
+            <script id="dsq-count-scr" src="//caseyspace.disqus.com/count.js" async></script>
+          </div>
+        </div>
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noBlogs>
+  <hr>
+  <h5> There are no blogs to list </h5>
+</ng-template>

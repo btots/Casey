@@ -1,0 +1,18 @@
+.entry-editor {
+  display: inline-block;
+}
+
+.blog-icon {
+  color:black;
+  display:inline-block;
+  padding: 0rem 1rem;
+}
+
+.blog-btn {
+  margin: .5rem;
+}
+
+.preview-box {
+  border: 1px solid goldenrod;
+  padding: 1rem;
+}

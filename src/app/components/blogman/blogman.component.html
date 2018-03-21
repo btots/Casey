@@ -1,0 +1,80 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="">Add New Blog</h3>
+      <form (ngSubmit)="onSubmit()" class="col-md-12 form-group">
+        <div class="row">
+          <div class="col-sm-6">
+            <label for="blogTitle">Title: </label>
+            <input id="blogTitle" type="text" placeholder="Add title" [(ngModel)]="blog.title" name="title">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <label for="blogEntry">Entry: </label>
+            <quill-editor [(ngModel)]="blog.entry" name="entry" class="entry-editor" id="blogEntry">
+            </quill-editor>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<hr>
+
+
+<div class="container-fluid" *ngIf="blogs?.length > 0; else noBlogs">
+  <div class="row">
+    <div class="col-md-12" style="margin: auto;">
+      <ul *ngFor="let blog of blogs" class="list-group">
+
+
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-12">
+              <i *ngIf="editState == false && blogToEdit == null" (click)="editBlog($event, blog)" class="fa fa-edit blog-icon"></i>
+              <i *ngIf="editState && blogToEdit.id == blog.id" (click)="clearState()" class="fa fa-times blog-icon"></i>
+              <h5 style="display:inline-block;">{{blog.title}}</h5>
+            </div>
+          </div>
+
+          <div *ngIf="editState && blogToEdit.id == blog.id">
+            <form (ngSubmit)="updateBlog(blog)" class="col-md-10 form-group">
+              <div class="row">
+                <div class="row">
+                  <div class="col-12">
+                    <h6>Preview:</h6>
+                    <div class="preview-box" [innerHTML]="blog.entry"></div>
+                    <hr>
+                    <div class="input-field col-sm-6">
+                      <label>Title: </label>
+                      <input type="text" placeholder="Add title" [(ngModel)]="blog.title" name="title">
+                    </div>
+                    <br>
+                    <quill-editor [(ngModel)]="blog.entry" name="entry" class="entry-editor">
+                    </quill-editor>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary blog-btn">Update Blog</button>
+                <button (click)="deleteBlog($event, blog)" class="btn btn-danger blog-btn">Delete Blog</button>
+              </div>
+            </form>
+          </div>
+
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #noBlogs>
+  <h5> Retrieving Blogs... </h5>
+</ng-template>
