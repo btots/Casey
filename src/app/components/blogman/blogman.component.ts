@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BlogmanagerService } from '../../services/blogmanager.service'
 import { Blog } from '../../models/blog'; 
 import { AuthService } from '../../services/auth.service';
@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './blogman.component.html',
   styleUrls: ['./blogman.component.css']
 })
-export class BlogmanComponent implements OnChanges {
+export class BlogmanComponent implements OnInit {
   blogs: Blog[];
   blog: Blog = {
     title: '',
@@ -28,7 +28,7 @@ export class BlogmanComponent implements OnChanges {
   //   });
   // }
 
-  ngOnChanges() {
+  ngOnInit() {
     this.blogManagerService.getBlogs().subscribe(blogs => {
       this.blogs = blogs;
       console.log("BlogMan init")
